@@ -2,3 +2,8 @@ name: LavaAndWater
 version: ${project.version}
 main: net.kunmc.lab.lavaandwater.LavaAndWater
 api-version: 1.16
+commands:
+  lavaandwater:
+    description: lavaandwater
+    usage: /<lavaandwater>
+    permission: op
