@@ -3,6 +3,10 @@ package net.kunmc.lab.lavaandwater;
 import net.kunmc.lab.lavaandwater.command.CommandData;
 import net.kunmc.lab.lavaandwater.command.CommandHandler;
 import net.kunmc.lab.lavaandwater.command.TabComplete;
+import net.kunmc.lab.lavaandwater.config.Config;
+import net.kunmc.lab.lavaandwater.world.waterLevelRise.RisingTask;
+import net.kunmc.lab.lavaandwater.world.waterLevelRise.chunk.ChunkManager;
+import net.kunmc.lab.lavaandwater.world.waterLevelRise.QueuedExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class LavaAndWater extends JavaPlugin {
@@ -14,14 +18,19 @@ public final class LavaAndWater extends JavaPlugin {
     public void onEnable() {
         plugin = this;
 
-        // TODO コンフィグ
+        // コンフィグ
+        Config.loadConfig();
 
         // コマンド
         getCommand(CommandData.WATER_AND_LAVA.commandName()).setExecutor(new CommandHandler());
         getCommand(CommandData.WATER_AND_LAVA.commandName()).setTabCompleter(new TabComplete());
+
         // TODO イベントリスナー
+        getServer().getPluginManager().registerEvents(new ChunkManager(), this);
+        getServer().getPluginManager().registerEvents(QueuedExecutor.instance(), this);
 
         // TODO タスク
+        new RisingTask().runTaskTimerAsynchronously(this,0, 400);
     }
 
     @Override

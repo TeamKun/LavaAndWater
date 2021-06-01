@@ -1,14 +1,12 @@
 package net.kunmc.lab.lavaandwater.command;
 
-import org.bukkit.Bukkit;
+import net.kunmc.lab.lavaandwater.config.Config;
+import net.kunmc.lab.lavaandwater.world.waterLevelRise.RisingTask;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 public class CommandHandler implements CommandExecutor {
 
@@ -74,9 +72,13 @@ public class CommandHandler implements CommandExecutor {
         switch (secondSubCommand) {
             case RUN:
                 commandSender.sendMessage("水面上昇開始");
+                Player p = (Player) commandSender;
+                RisingTask.player = p;
+                RisingTask.start(p.getWorld());
                 break;
             case PAUSE:
                 commandSender.sendMessage("水面上昇停止");
+                RisingTask.pause();
                 break;
         }
     }
@@ -127,11 +129,17 @@ public class CommandHandler implements CommandExecutor {
 
         switch (thirdSubCommand) {
             case LAVA_RAINY_SPAN:
-                commandSender.sendMessage("溶岩雨処理スパン変更");
+                Config.setLavaRainySpan(commandSender, arguments[3]);
                 break;
             case WATER_RISING_SPAN:
-                commandSender.sendMessage("水面上昇処理スパン変更");
+                Config.setWaterRisingSpan(commandSender, arguments[3]);
                 break;
+            case CENTRAL_PLAYER:
+                Config.setCentralPlayer(commandSender, arguments[3]);
+                return;
+            case EFFECTIVE_RANGE:
+                Config.setEffectiveRange(commandSender, arguments[3]);
+                return;
         }
     }
 }

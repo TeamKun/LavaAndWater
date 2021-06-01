@@ -12,7 +12,10 @@ public enum CommandData {
     SHOW("show"),
     SET("set"),
     WATER_RISING_SPAN("waterRisingSpan"),
-    LAVA_RAINY_SPAN("lavaRainySpan");
+    LAVA_RAINY_SPAN("lavaRainySpan"),
+    CENTRAL_PLAYER("centralPlayer"),
+    EFFECTIVE_RANGE("effectiveRange");
+
 
     private String commandName;
 

@@ -1,7 +1,5 @@
 package net.kunmc.lab.lavaandwater.command;
 
-import org.bukkit.command.CommandSender;
-
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,8 +22,7 @@ public class CommandCombine {
         allowed.put(CommandData.CONFIG, EnumSet.of(CommandData.SHOW, CommandData.SET));
 
         // 第三引数
-        allowed.put(CommandData.SET, EnumSet.of(CommandData.WATER_RISING_SPAN, CommandData.LAVA_RAINY_SPAN));
-
+        allowed.put(CommandData.SET, EnumSet.of(CommandData.WATER_RISING_SPAN, CommandData.LAVA_RAINY_SPAN, CommandData.CENTRAL_PLAYER, CommandData.EFFECTIVE_RANGE));
     }
 
     /**

@@ -21,8 +21,10 @@ public class TabComplete implements TabCompleter {
                 return firstArgs();
             case 2:
                 return secondArgs();
-            case 3 :
+            case 3:
                 return thirdArgs();
+            case 4:
+                return fourthArgs();
         }
         return new ArrayList<>();
     }
@@ -69,8 +71,18 @@ public class TabComplete implements TabCompleter {
         if(!arguments[1].equalsIgnoreCase(CommandData.SET.commandName())) return new ArrayList<>();
 
         return Stream.of(CommandData.LAVA_RAINY_SPAN.commandName(),
-                CommandData.WATER_RISING_SPAN.commandName())
+                CommandData.WATER_RISING_SPAN.commandName(),
+                CommandData.CENTRAL_PLAYER.commandName())
                 .filter(e -> e.startsWith(arguments[2]))
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * 第4引数の補完
+     */
+    private List<String> fourthArgs() {
+        if(!arguments[2].equalsIgnoreCase(CommandData.CENTRAL_PLAYER.commandName())) return new ArrayList<>();
+
+        return null;
     }
 }
