@@ -1,6 +1,7 @@
-package net.kunmc.lab.lavaandwater.waterLevelRise.chunk;
+package net.kunmc.lab.lavaandwater.world.waterLevelRise.chunk;
 
-import net.kunmc.lab.lavaandwater.waterLevelRise.RisingTask;
+import net.kunmc.lab.lavaandwater.world.waterLevelRise.BlockModel;
+import net.kunmc.lab.lavaandwater.world.waterLevelRise.RisingTask;
 import org.bukkit.Chunk;
 
 import java.util.ArrayList;

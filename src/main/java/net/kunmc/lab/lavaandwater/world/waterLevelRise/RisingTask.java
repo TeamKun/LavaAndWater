@@ -1,16 +1,13 @@
-package net.kunmc.lab.lavaandwater.waterLevelRise;
+package net.kunmc.lab.lavaandwater.world.waterLevelRise;
 
 import net.kunmc.lab.lavaandwater.util.MessageUtil;
-import net.kunmc.lab.lavaandwater.waterLevelRise.chunk.BlockModel;
-import net.kunmc.lab.lavaandwater.waterLevelRise.chunk.ChunkManager;
-import net.kunmc.lab.lavaandwater.waterLevelRise.chunk.ChunkModels;
+import net.kunmc.lab.lavaandwater.world.waterLevelRise.chunk.ChunkManager;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-import javax.rmi.CORBA.Util;
 import java.util.stream.IntStream;
 
 public class RisingTask extends BukkitRunnable {

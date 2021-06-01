@@ -1,4 +1,4 @@
-package net.kunmc.lab.lavaandwater.waterLevelRise.chunk;
+package net.kunmc.lab.lavaandwater.world.waterLevelRise;
 
 import com.destroystokyo.paper.event.server.ServerTickStartEvent;
 import org.bukkit.event.EventHandler;

@@ -1,8 +1,7 @@
-package net.kunmc.lab.lavaandwater.waterLevelRise.chunk;
+package net.kunmc.lab.lavaandwater.world.waterLevelRise;
 
 
 import net.kunmc.lab.lavaandwater.util.MessageUtil;
-import net.kunmc.lab.lavaandwater.waterLevelRise.RisingTask;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;

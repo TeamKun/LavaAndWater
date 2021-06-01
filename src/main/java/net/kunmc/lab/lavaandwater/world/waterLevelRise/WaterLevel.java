@@ -1,4 +1,4 @@
-package net.kunmc.lab.lavaandwater.waterLevelRise;
+package net.kunmc.lab.lavaandwater.world.waterLevelRise;
 
 public class WaterLevel {
     /** インスタンス */

@@ -1,4 +1,4 @@
-package net.kunmc.lab.lavaandwater.waterLevelRise.chunk;
+package net.kunmc.lab.lavaandwater.world.waterLevelRise.chunk;
 
 import net.kunmc.lab.lavaandwater.util.MessageUtil;
 import org.bukkit.ChunkSnapshot;
