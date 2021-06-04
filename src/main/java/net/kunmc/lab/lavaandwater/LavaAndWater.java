@@ -4,6 +4,7 @@ import net.kunmc.lab.lavaandwater.command.CommandData;
 import net.kunmc.lab.lavaandwater.command.CommandHandler;
 import net.kunmc.lab.lavaandwater.command.TabComplete;
 import net.kunmc.lab.lavaandwater.config.Config;
+import net.kunmc.lab.lavaandwater.world.lavaRain.RainingTask;
 import net.kunmc.lab.lavaandwater.world.waterLevelRise.RisingTask;
 import net.kunmc.lab.lavaandwater.world.waterLevelRise.chunk.ChunkManager;
 import net.kunmc.lab.lavaandwater.world.waterLevelRise.QueuedExecutor;
@@ -31,6 +32,7 @@ public final class LavaAndWater extends JavaPlugin {
 
         // TODO タスク
         new RisingTask().runTaskTimerAsynchronously(this,0, 400);
+        new RainingTask().runTaskTimerAsynchronously(this, 0, 5);
     }
 
     @Override

@@ -1,6 +1,9 @@
 package net.kunmc.lab.lavaandwater.command;
 
 import net.kunmc.lab.lavaandwater.config.Config;
+import net.kunmc.lab.lavaandwater.util.DecorationConst;
+import net.kunmc.lab.lavaandwater.util.MessageUtil;
+import net.kunmc.lab.lavaandwater.world.lavaRain.RainingTask;
 import net.kunmc.lab.lavaandwater.world.waterLevelRise.RisingTask;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -71,13 +74,12 @@ public class CommandHandler implements CommandExecutor {
     private static void executeWaterLevelRise() {
         switch (secondSubCommand) {
             case RUN:
-                commandSender.sendMessage("水面上昇開始");
+                MessageUtil.sendAll(DecorationConst.GREEN + "水面上昇開始");
                 Player p = (Player) commandSender;
-                RisingTask.player = p;
                 RisingTask.start(p.getWorld());
                 break;
             case PAUSE:
-                commandSender.sendMessage("水面上昇停止");
+                MessageUtil.sendAll(DecorationConst.GREEN + "水面上昇停止");
                 RisingTask.pause();
                 break;
         }
@@ -89,10 +91,20 @@ public class CommandHandler implements CommandExecutor {
     private static void executeLavaRain() {
         switch (secondSubCommand) {
             case RUN:
-                commandSender.sendMessage("溶岩雨開始");
+                if (RainingTask.isRunning) {
+                    MessageUtil.sendAll(DecorationConst.RED + "すでに実行中です");
+                    return;
+                }
+                MessageUtil.sendAll(DecorationConst.GREEN + "溶岩雨開始");
+                RainingTask.isRunning = true;
                 break;
             case PAUSE:
-                commandSender.sendMessage("溶岩雨停止");
+                if (!RainingTask.isRunning) {
+                    MessageUtil.sendAll(DecorationConst.RED + "実行中ではありません");
+                    return;
+                }
+                MessageUtil.sendAll(DecorationConst.GREEN + "溶岩雨停止");
+                RainingTask.isRunning = false;
                 break;
         }
     }

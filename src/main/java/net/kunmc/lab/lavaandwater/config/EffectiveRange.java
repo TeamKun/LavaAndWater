@@ -9,8 +9,8 @@ public class EffectiveRange {
             this.effectiveRange = 16;
         }
 
-        if (effectiveRange > 320) {
-            this.effectiveRange= 320;
+        if (effectiveRange > 512) {
+            this.effectiveRange = 512;
         }
 
         this.effectiveRange = effectiveRange;

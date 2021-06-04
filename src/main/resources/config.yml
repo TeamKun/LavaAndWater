@@ -1,3 +1,3 @@
-effectiveRange: 160 # 影響範囲（単位:ブロック）
+effectiveRange: 512 # 影響範囲（単位:ブロック）
 lavaRainySpan: 5 # 溶岩雨の処理スパン（単位：tick）
 waterRisingSpan: 20 # 水面上昇の処理スパン（単位：秒）

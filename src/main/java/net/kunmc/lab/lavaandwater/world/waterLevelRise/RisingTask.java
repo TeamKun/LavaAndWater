@@ -1,5 +1,6 @@
 package net.kunmc.lab.lavaandwater.world.waterLevelRise;
 
+import net.kunmc.lab.lavaandwater.config.Config;
 import net.kunmc.lab.lavaandwater.util.MessageUtil;
 import net.kunmc.lab.lavaandwater.world.waterLevelRise.chunk.ChunkManager;
 import org.bukkit.Location;
@@ -21,40 +22,22 @@ public class RisingTask extends BukkitRunnable {
     /** 実行中フラグ */
     private static boolean isRunning;
 
-    /** 後で消す player*/
-    public static Player player;
-
     @Override
     public void run() {
 
         if (!isRunning || world == null) {
-            MessageUtil.sendAll("return1");
             return;
         }
 
         if (ChunkManager.targetChunkSet().size() < 1) {
-            MessageUtil.sendAll("return2");
             return;
         }
 
-          MessageUtil.sendAll("runTask");
-//        ChunkModels chunks = new ChunkModels();
-//        chunks.setWater();
-
-
-        Location center = player.getLocation();
-        double centerX = center.getX();
-        double centerZ = center.getZ();
-        IntStream.range(0, 320).forEach(i -> IntStream.range(0, 320).forEach(j -> {
-
-            Location l = new Vector(centerX + i, currentWaterLevel.currentLevel() , centerZ + j).toLocation(world);
-            MessageUtil.sendAll(l.toString());
-            new BlockModel(l).setWater();
-
-        }));
+        Config.centralPlayer().effectiveBlocks(currentWaterLevel).forEach(blockModel -> {
+            blockModel.setWater();
+        });
 
         currentWaterLevel.rise();
-
 
         // 限界まで上昇仕切ったらタスクを終了する
         if (currentWaterLevel.isReachedHeightLimit()) {

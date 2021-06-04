@@ -24,7 +24,6 @@ public class BlockModel {
             return;
         }
 
-        MessageUtil.sendAll("1");
         // 上空にブロックが存在する
         Location thisLocation = block.getLocation();
         Location highestLocation = RisingTask.world.getHighestBlockAt(thisLocation).getLocation();
