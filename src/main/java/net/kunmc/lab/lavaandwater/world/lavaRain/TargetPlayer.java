@@ -9,7 +9,11 @@ import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerStatisticIncrementEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
@@ -56,7 +60,7 @@ public class TargetPlayer {
         if (block.getLocation().getBlockY() < playerLocation.getBlockY()) {
             QueuedExecutor.instance().offer(new BukkitRunnable() {
                 public void run() {
-                    player.getLocation().getBlock().setType(Material.FIRE);
+                    player.setFireTicks(20);
                 }
             });
         }

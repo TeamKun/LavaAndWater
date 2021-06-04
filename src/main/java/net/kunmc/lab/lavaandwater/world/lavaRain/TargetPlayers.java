@@ -39,6 +39,7 @@ public class TargetPlayers {
             targetPlayer.burnPlayer();
         });
     }
+
     /**
      * 周囲の可燃性ブロックを燃やす
      * */

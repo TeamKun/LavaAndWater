@@ -6,7 +6,6 @@ import net.kunmc.lab.lavaandwater.command.TabComplete;
 import net.kunmc.lab.lavaandwater.config.Config;
 import net.kunmc.lab.lavaandwater.world.lavaRain.RainingTask;
 import net.kunmc.lab.lavaandwater.world.waterLevelRise.RisingTask;
-import net.kunmc.lab.lavaandwater.world.waterLevelRise.chunk.ChunkManager;
 import net.kunmc.lab.lavaandwater.world.waterLevelRise.QueuedExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -26,8 +25,7 @@ public final class LavaAndWater extends JavaPlugin {
         getCommand(CommandData.WATER_AND_LAVA.commandName()).setExecutor(new CommandHandler());
         getCommand(CommandData.WATER_AND_LAVA.commandName()).setTabCompleter(new TabComplete());
 
-        // TODO イベントリスナー
-        getServer().getPluginManager().registerEvents(new ChunkManager(), this);
+        // イベントリスナー
         getServer().getPluginManager().registerEvents(QueuedExecutor.instance(), this);
 
         // TODO タスク
