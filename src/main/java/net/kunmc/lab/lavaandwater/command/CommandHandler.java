@@ -34,7 +34,6 @@ public class CommandHandler implements CommandExecutor {
 
         // 引数が不足している
         if (!CommandError.isEnoughArgument(2)) {
-            commandSender.sendMessage("1");
             return false;
         }
 
@@ -74,6 +73,13 @@ public class CommandHandler implements CommandExecutor {
     private static void executeWaterLevelRise() {
         switch (secondSubCommand) {
             case RUN:
+
+                // 中心プレイヤーが設定されていない
+                if (Config.centralPlayer() == null) {
+                    commandSender.sendMessage(DecorationConst.RED + "中心プレイヤーが設定されていません");
+                    return;
+                }
+
                 MessageUtil.sendAll(DecorationConst.GREEN + "水面上昇開始");
                 Player p = (Player) commandSender;
                 RisingTask.start(p.getWorld());
