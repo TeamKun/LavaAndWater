@@ -35,6 +35,20 @@ public class Config {
         waterRisingSpan = new WaterRisingSpan(config.getInt("waterRisingSpan"));
     }
 
+    public static void show(CommandSender sender) {
+
+        String centralPlayerName = null;
+        if (centralPlayer != null) {
+            centralPlayerName = centralPlayer.playerName();
+        }
+
+        sender.sendMessage(DecorationConst.GREEN + "=============現在の設定=============");
+        sender.sendMessage(DecorationConst.GREEN + "中心プレイヤー: " + centralPlayerName);
+        sender.sendMessage(DecorationConst.GREEN + "影響範囲: 周囲" + Config.effectiveRange.halfRange() + "ブロック");
+        sender.sendMessage(DecorationConst.GREEN + "水面上昇スパン: " + Config.waterRisingSpan.value() + "秒");
+        sender.sendMessage(DecorationConst.GREEN + "==================================");
+    }
+
     /**********
      * getter *
      **********/

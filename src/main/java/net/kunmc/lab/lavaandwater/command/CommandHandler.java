@@ -121,7 +121,7 @@ public class CommandHandler implements CommandExecutor {
     private static void executeConfig() {
         switch (secondSubCommand) {
             case SHOW:
-                commandSender.sendMessage("コンフィグ表示");
+                Config.show(commandSender);
                 break;
             case SET:
                 executeConfigSet();
