@@ -16,7 +16,6 @@ public enum CommandData {
     CENTRAL_PLAYER("centralPlayer"),
     EFFECTIVE_RANGE("effectiveRange");
 
-
     private String commandName;
 
     CommandData(String commandName) {
