@@ -43,7 +43,6 @@ public class CentralPlayer {
         Location center = player.getLocation();
         BoundingBox boundingBox = BoundingBox.of(center.getBlock()).expand(Config.effectiveRange().halfRange());
 
-        MessageUtil.sendAll("長さ" + Config.effectiveRange().halfRange());
         List<BlockModel> result = new ArrayList<>();
 
         IntStream.range((int) boundingBox.getMinX(),(int) boundingBox.getMaxX()).forEach(i -> IntStream.range((int) boundingBox.getMinZ(), (int) boundingBox.getMaxZ()).forEach(j -> {

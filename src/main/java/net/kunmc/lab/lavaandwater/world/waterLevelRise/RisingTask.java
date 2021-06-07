@@ -29,16 +29,10 @@ public class RisingTask extends BukkitRunnable {
             return;
         }
 
-//        if (ChunkManager.targetChunkSet().size() < 1) {
-//            MessageUtil.sendAll("return2");
-//            return;
-//        }
-
         Config.centralPlayer().effectiveBlocks(currentWaterLevel).forEach(blockModel -> {
             blockModel.setWater();
         });
 
-        MessageUtil.sendAll("run");
         currentWaterLevel.rise();
 
         // 限界まで上昇仕切ったらタスクを終了する
