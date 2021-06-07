@@ -29,8 +29,8 @@ public final class LavaAndWater extends JavaPlugin {
         getServer().getPluginManager().registerEvents(QueuedExecutor.instance(), this);
 
         // TODO タスク
-        new RisingTask().runTaskTimerAsynchronously(this,0, 400);
-        new RainingTask().runTaskTimerAsynchronously(this, 0, 5);
+        new RisingTask().runTaskTimerAsynchronously(this,0, Config.waterRisingSpan().value());
+        new RainingTask().runTaskTimerAsynchronously(this, 0, Config.lavaRainySpan().value());
     }
 
     @Override
