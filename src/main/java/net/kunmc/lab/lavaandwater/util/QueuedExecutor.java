@@ -15,9 +15,6 @@ import static java.lang.Math.min;
 
 public class QueuedExecutor implements Listener {
 
-    /** インスタンス */
-    //private final static QueuedExecutor INSTANCE = new QueuedExecutor();
-
     /** 1秒あたりに実行されるアクション（Runnable）の数 */
     private int numberOfActionPerSec = 100000;
 
@@ -48,13 +45,6 @@ public class QueuedExecutor implements Listener {
             }
         }, (long)updatePeriodSeconds * 1000, (long)updatePeriodSeconds * 1000);
     }
-
-    /**
-     * インスタンスを取得する(シングルトン)
-     * */
-//    public static QueuedExecutor instance() {
-//        return INSTANCE;
-//    }
 
     @EventHandler(ignoreCancelled = true)
     public void onServerTickStart(ServerTickStartEvent event) {
