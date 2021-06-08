@@ -46,6 +46,7 @@ public class Config {
         sender.sendMessage(DecorationConst.GREEN + "中心プレイヤー: " + centralPlayerName);
         sender.sendMessage(DecorationConst.GREEN + "影響範囲: 周囲" + Config.effectiveRange.halfRange() + "ブロック");
         sender.sendMessage(DecorationConst.GREEN + "水面上昇スパン: " + Config.waterRisingSpan.value() + "秒");
+        sender.sendMessage(DecorationConst.GREEN + "溶岩雨処理スパン: " + Config.lavaRainySpan.value() + "tick");
         sender.sendMessage(DecorationConst.GREEN + "==================================");
     }
 
