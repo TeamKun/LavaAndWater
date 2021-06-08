@@ -1,7 +1,8 @@
 package net.kunmc.lab.lavaandwater.world.waterLevelRise;
 
 
-import net.kunmc.lab.lavaandwater.util.MessageUtil;
+import net.kunmc.lab.lavaandwater.util.QueuedExecutor;
+import net.kunmc.lab.lavaandwater.world.TaskManager;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -31,7 +32,7 @@ public class BlockModel {
             return;
         }
 
-        QueuedExecutor.instance().offer(new BukkitRunnable() {
+        TaskManager.risingTaskQue.offer(new BukkitRunnable() {
             public void run() {
                 block.setType(Material.WATER);
             }

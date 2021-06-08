@@ -1,15 +1,8 @@
 package net.kunmc.lab.lavaandwater.world.waterLevelRise;
 
 import net.kunmc.lab.lavaandwater.config.Config;
-import net.kunmc.lab.lavaandwater.util.MessageUtil;
-import net.kunmc.lab.lavaandwater.world.waterLevelRise.chunk.ChunkManager;
-import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.util.Vector;
-
-import java.util.stream.IntStream;
 
 public class RisingTask extends BukkitRunnable {
 
@@ -54,5 +47,12 @@ public class RisingTask extends BukkitRunnable {
      * */
     public static void pause() {
         isRunning = false;
+    }
+
+    /**
+     * 実行中か
+     * */
+    public static boolean isRunning() {
+        return isRunning;
     }
 }

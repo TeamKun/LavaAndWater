@@ -4,9 +4,8 @@ import net.kunmc.lab.lavaandwater.command.CommandData;
 import net.kunmc.lab.lavaandwater.command.CommandHandler;
 import net.kunmc.lab.lavaandwater.command.TabComplete;
 import net.kunmc.lab.lavaandwater.config.Config;
-import net.kunmc.lab.lavaandwater.world.lavaRain.RainingTask;
-import net.kunmc.lab.lavaandwater.world.waterLevelRise.RisingTask;
-import net.kunmc.lab.lavaandwater.world.waterLevelRise.QueuedExecutor;
+import net.kunmc.lab.lavaandwater.world.TaskManager;
+import net.kunmc.lab.lavaandwater.util.QueuedExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class LavaAndWater extends JavaPlugin {
@@ -26,11 +25,14 @@ public final class LavaAndWater extends JavaPlugin {
         getCommand(CommandData.WATER_AND_LAVA.commandName()).setTabCompleter(new TabComplete());
 
         // イベントリスナー
-        getServer().getPluginManager().registerEvents(QueuedExecutor.instance(), this);
+        TaskManager.rainingTaskQue = new QueuedExecutor();
+        TaskManager.risingTaskQue = new QueuedExecutor();
+        getServer().getPluginManager().registerEvents(TaskManager.rainingTaskQue, this);
+        getServer().getPluginManager().registerEvents(TaskManager.risingTaskQue, this);
 
-        // TODO タスク
-        new RisingTask().runTaskTimerAsynchronously(this,0, Config.waterRisingSpan().value());
-        new RainingTask().runTaskTimerAsynchronously(this, 0, Config.lavaRainySpan().value());
+        // タスク
+        TaskManager.runRisingTask();
+        TaskManager.runRainingTask();
     }
 
     @Override
