@@ -1,4 +1,4 @@
-package net.kunmc.lab.lavaandwater.world.waterLevelRise;
+package net.kunmc.lab.lavaandwater.util;
 
 import com.destroystokyo.paper.event.server.ServerTickStartEvent;
 import org.bukkit.event.EventHandler;
@@ -16,18 +16,19 @@ import static java.lang.Math.min;
 public class QueuedExecutor implements Listener {
 
     /** インスタンス */
-    private final static QueuedExecutor INSTANCE = new QueuedExecutor();
+    //private final static QueuedExecutor INSTANCE = new QueuedExecutor();
 
     /** 1秒あたりに実行されるアクション（Runnable）の数 */
     private int numberOfActionPerSec = 100000;
 
     // 実際に実行できるアクションの数。5秒ごとにリセットされ、次のターゲットを決定するために使用される
     private int count = 0;
+
     private Deque<Runnable> taskQueue = new ConcurrentLinkedDeque();
     private boolean isRunning;
     private final float updatePeriodSeconds = 3L;
 
-    private QueuedExecutor() {
+    public QueuedExecutor() {
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -51,9 +52,9 @@ public class QueuedExecutor implements Listener {
     /**
      * インスタンスを取得する(シングルトン)
      * */
-    public static QueuedExecutor instance() {
-        return INSTANCE;
-    }
+//    public static QueuedExecutor instance() {
+//        return INSTANCE;
+//    }
 
     @EventHandler(ignoreCancelled = true)
     public void onServerTickStart(ServerTickStartEvent event) {

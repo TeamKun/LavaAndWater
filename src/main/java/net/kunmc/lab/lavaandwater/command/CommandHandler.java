@@ -3,6 +3,7 @@ package net.kunmc.lab.lavaandwater.command;
 import net.kunmc.lab.lavaandwater.config.Config;
 import net.kunmc.lab.lavaandwater.util.DecorationConst;
 import net.kunmc.lab.lavaandwater.util.MessageUtil;
+import net.kunmc.lab.lavaandwater.world.TaskManager;
 import net.kunmc.lab.lavaandwater.world.lavaRain.RainingTask;
 import net.kunmc.lab.lavaandwater.world.waterLevelRise.RisingTask;
 import org.bukkit.command.Command;
@@ -39,7 +40,6 @@ public class CommandHandler implements CommandExecutor {
 
         // 入力されたサブコマンドが存在しない
         if (!CommandError.existSubCommand(0) || !CommandError.existSubCommand(1)) {
-            commandSender.sendMessage("2");
             return false;
         }
 
@@ -48,7 +48,6 @@ public class CommandHandler implements CommandExecutor {
 
         // コマンドの組み合わせが不正
         if (!CommandError.canCombine(firstSubCommand, secondSubCommand)) {
-            commandSender.sendMessage("3");
             return false;
         }
 
@@ -74,18 +73,30 @@ public class CommandHandler implements CommandExecutor {
         switch (secondSubCommand) {
             case RUN:
 
+                if (RisingTask.isRunning()) {
+                    commandSender.sendMessage(DecorationConst.RED + "すでに実行中です");
+                    return;
+                }
                 // 中心プレイヤーが設定されていない
                 if (Config.centralPlayer() == null) {
                     commandSender.sendMessage(DecorationConst.RED + "中心プレイヤーが設定されていません");
                     return;
                 }
 
-                MessageUtil.sendAll(DecorationConst.GREEN + "水面上昇開始");
+                MessageUtil.sendAll(DecorationConst.GREEN + "水面上昇が始まった!");
                 Player p = (Player) commandSender;
+                TaskManager.runRisingTask();
                 RisingTask.start(p.getWorld());
                 break;
+
             case PAUSE:
+
+                if (!RisingTask.isRunning()) {
+                    commandSender.sendMessage(DecorationConst.RED + "実行中ではありません");
+                    return;
+                }
                 MessageUtil.sendAll(DecorationConst.GREEN + "水面上昇停止");
+                TaskManager.pauseRisingTask();
                 RisingTask.pause();
                 break;
         }
@@ -98,18 +109,20 @@ public class CommandHandler implements CommandExecutor {
         switch (secondSubCommand) {
             case RUN:
                 if (RainingTask.isRunning) {
-                    MessageUtil.sendAll(DecorationConst.RED + "すでに実行中です");
+                    commandSender.sendMessage(DecorationConst.RED + "すでに実行中です");
                     return;
                 }
-                MessageUtil.sendAll(DecorationConst.GREEN + "溶岩雨開始");
+                MessageUtil.sendAll(DecorationConst.GREEN + "溶岩雨が降り始める!");
+                TaskManager.runRainingTask();
                 RainingTask.isRunning = true;
                 break;
             case PAUSE:
                 if (!RainingTask.isRunning) {
-                    MessageUtil.sendAll(DecorationConst.RED + "実行中ではありません");
+                    commandSender.sendMessage(DecorationConst.RED + "実行中ではありません");
                     return;
                 }
                 MessageUtil.sendAll(DecorationConst.GREEN + "溶岩雨停止");
+                TaskManager.pauseRainingTask();
                 RainingTask.isRunning = false;
                 break;
         }
@@ -134,7 +147,7 @@ public class CommandHandler implements CommandExecutor {
      * */
     private static void executeConfigSet() {
         // 引数が不足している
-        if (!CommandError.isEnoughArgument(3)) {
+        if (!CommandError.isEnoughArgument(4)) {
             return;
         }
 
@@ -148,15 +161,35 @@ public class CommandHandler implements CommandExecutor {
         switch (thirdSubCommand) {
             case LAVA_RAINY_SPAN:
                 Config.setLavaRainySpan(commandSender, arguments[3]);
+
+                // 再起動
+                if (RainingTask.isRunning) {
+                    TaskManager.runRainingTask();
+                }
                 break;
             case WATER_RISING_SPAN:
                 Config.setWaterRisingSpan(commandSender, arguments[3]);
+
+                // 再起動
+                if (RisingTask.isRunning()) {
+                    TaskManager.runRisingTask();
+                }
                 break;
             case CENTRAL_PLAYER:
                 Config.setCentralPlayer(commandSender, arguments[3]);
+
+                // 再起動
+                if (RisingTask.isRunning()) {
+                    TaskManager.runRisingTask();
+                }
                 return;
             case EFFECTIVE_RANGE:
                 Config.setEffectiveRange(commandSender, arguments[3]);
+
+                // 再起動
+                if (RisingTask.isRunning()) {
+                    TaskManager.runRisingTask();
+                }
                 return;
         }
     }
