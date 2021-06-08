@@ -72,7 +72,8 @@ public class TabComplete implements TabCompleter {
 
         return Stream.of(CommandData.LAVA_RAINY_SPAN.commandName(),
                 CommandData.WATER_RISING_SPAN.commandName(),
-                CommandData.CENTRAL_PLAYER.commandName())
+                CommandData.CENTRAL_PLAYER.commandName(),
+                CommandData.EFFECTIVE_RANGE.commandName())
                 .filter(e -> e.startsWith(arguments[2]))
                 .collect(Collectors.toList());
     }
