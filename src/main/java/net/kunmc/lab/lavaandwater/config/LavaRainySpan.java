@@ -5,8 +5,8 @@ public class LavaRainySpan {
     private int lavaRainySpan;
 
     LavaRainySpan(int lavaRainySpan) {
-        if (lavaRainySpan <= 0) {
-            this.lavaRainySpan = 1;
+        if (lavaRainySpan <= 5) {
+            this.lavaRainySpan = 5;
         }
 
         if (lavaRainySpan > 200) {
