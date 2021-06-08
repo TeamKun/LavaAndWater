@@ -1,19 +1,12 @@
 package net.kunmc.lab.lavaandwater.world.lavaRain;
 
-import net.kunmc.lab.lavaandwater.util.MessageUtil;
 import net.kunmc.lab.lavaandwater.util.RandomUtil;
-import net.kunmc.lab.lavaandwater.world.waterLevelRise.QueuedExecutor;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Particle;
-import org.bukkit.World;
+import net.kunmc.lab.lavaandwater.util.QueuedExecutor;
+import net.kunmc.lab.lavaandwater.world.TaskManager;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerStatisticIncrementEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
@@ -40,7 +33,7 @@ public class TargetPlayer {
         IntStream.range((int) range.getMinX(),(int) range.getMaxX()).
                 forEach(i -> IntStream.range((int) range.getMinZ(), (int) range.getMaxZ()).forEach(j -> {
             if (RandomUtil.lottery(5)) {
-                QueuedExecutor.instance().offer(new BukkitRunnable() {
+                TaskManager.rainingTaskQue.offer(new BukkitRunnable() {
                     public void run() {
                         world.spawnParticle(Particle.DRIP_LAVA, i, y, j, 1);
                     }
@@ -57,8 +50,13 @@ public class TargetPlayer {
         Location playerLocation = player.getLocation();
         Block block = player.getWorld().getHighestBlockAt(playerLocation);
 
+        // クリエイティブは対象外
+        if (player.getGameMode() == GameMode.CREATIVE) {
+            return;
+        }
+
         if (block.getLocation().getBlockY() < playerLocation.getBlockY()) {
-            QueuedExecutor.instance().offer(new BukkitRunnable() {
+            TaskManager.rainingTaskQue.offer(new BukkitRunnable() {
                 public void run() {
                     player.setFireTicks(20);
                 }
@@ -83,7 +81,7 @@ public class TargetPlayer {
                     }
                     // 燃える確率を抽選する
                     if (RandomUtil.lottery(0.01)) {
-                        QueuedExecutor.instance().offer(new BukkitRunnable() {
+                        TaskManager.rainingTaskQue.offer(new BukkitRunnable() {
                             public void run() {
                                 targetBlock.getRelative(BlockFace.UP).setType(Material.FIRE);
                             }
