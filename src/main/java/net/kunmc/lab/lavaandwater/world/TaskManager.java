@@ -5,7 +5,6 @@ import net.kunmc.lab.lavaandwater.config.Config;
 import net.kunmc.lab.lavaandwater.util.QueuedExecutor;
 import net.kunmc.lab.lavaandwater.world.lavaRain.RainingTask;
 import net.kunmc.lab.lavaandwater.world.waterLevelRise.RisingTask;
-import org.bukkit.World;
 import org.bukkit.scheduler.BukkitTask;
 
 public class TaskManager {
@@ -31,7 +30,7 @@ public class TaskManager {
             risingTask.cancel();
         }
 
-        risingTask = new RisingTask().runTaskTimerAsynchronously(LavaAndWater.plugin,0, Config.waterRisingSpan().value());
+        risingTask = new RisingTask().runTaskTimerAsynchronously(LavaAndWater.plugin,0, Config.waterRisingSpan().tickValue());
     }
 
     /**

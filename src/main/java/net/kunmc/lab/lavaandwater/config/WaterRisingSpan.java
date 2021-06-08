@@ -18,9 +18,16 @@ public class WaterRisingSpan {
     }
 
     /**
+     * 処理スパンを取得する(tick)
+     **/
+    public int tickValue() {
+        return this.waterRisingSpan * 20;
+    }
+
+    /**
      * 処理スパンを取得する(秒)
      **/
-    public int value() {
-        return this.waterRisingSpan * 20;
+    public int secondValue() {
+        return this.waterRisingSpan;
     }
 }
