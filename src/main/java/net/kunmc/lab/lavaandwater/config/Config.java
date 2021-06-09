@@ -49,7 +49,7 @@ public class Config {
         sender.sendMessage(DecorationConst.GREEN + "=============現在の設定=============");
         sender.sendMessage(DecorationConst.GREEN + "中心プレイヤー: " + centralPlayerName);
         sender.sendMessage(DecorationConst.GREEN + "現在の水位: y = " + (Config.waterLevel.currentLevel() - 1));
-        sender.sendMessage(DecorationConst.GREEN + "影響範囲: 周囲" + Config.effectiveRange.halfRange() + "ブロック");
+        sender.sendMessage(DecorationConst.GREEN + "影響範囲: 周囲" + Config.effectiveRange.range() + "ブロック");
         sender.sendMessage(DecorationConst.GREEN + "水面上昇スパン: " + Config.waterRisingSpan.secondValue() + "秒");
         sender.sendMessage(DecorationConst.GREEN + "溶岩雨処理スパン: " + Config.lavaRainySpan.value() + "tick");
         sender.sendMessage(DecorationConst.GREEN + "==================================");
@@ -103,7 +103,7 @@ public class Config {
     public static void setEffectiveRange(CommandSender sender, String arg) {
         try {
             effectiveRange = new EffectiveRange(Integer.parseInt(arg));
-            sender.sendMessage(DecorationConst.GREEN + "影響範囲を" + arg + "に設定しました");
+            sender.sendMessage(DecorationConst.GREEN + "影響範囲を" + effectiveRange.range() + "に設定しました");
         } catch (NumberFormatException e) {
             sender.sendMessage("引数が不正です");
         }
