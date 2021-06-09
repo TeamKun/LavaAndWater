@@ -6,12 +6,14 @@ public class WaterRisingSpan {
     private int waterRisingSpan;
 
     WaterRisingSpan(int waterRisingSpan) {
+
+
         if (waterRisingSpan <= 20) {
-            this.waterRisingSpan = 20;
+            waterRisingSpan = 20;
         }
 
         if (waterRisingSpan > 600) {
-            this.waterRisingSpan = 600;
+            waterRisingSpan = 600;
         }
 
         this.waterRisingSpan = waterRisingSpan;

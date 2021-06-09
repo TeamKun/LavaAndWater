@@ -14,6 +14,7 @@ public enum CommandData {
     WATER_RISING_SPAN("waterRisingSpan"),
     LAVA_RAINY_SPAN("lavaRainySpan"),
     CENTRAL_PLAYER("centralPlayer"),
+    WATER_LEVEL("waterLevel"),
     EFFECTIVE_RANGE("effectiveRange");
 
     private String commandName;

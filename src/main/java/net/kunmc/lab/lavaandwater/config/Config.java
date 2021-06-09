@@ -21,6 +21,9 @@ public class Config {
     /** 水面上昇スパン */
     private static WaterRisingSpan waterRisingSpan;
 
+    /** 水位 */
+    private static WaterLevel waterLevel;
+
     /**
      * コンフィグをロードする
      * */
@@ -30,6 +33,7 @@ public class Config {
         //　コンフィグファイルを取得
         FileConfiguration config = LavaAndWater.plugin.getConfig();
 
+        waterLevel = WaterLevel.instance();
         effectiveRange = new EffectiveRange(config.getInt("effectiveRange"));
         lavaRainySpan = new LavaRainySpan(config.getInt("lavaRainySpan"));
         waterRisingSpan = new WaterRisingSpan(config.getInt("waterRisingSpan"));
@@ -44,6 +48,7 @@ public class Config {
 
         sender.sendMessage(DecorationConst.GREEN + "=============現在の設定=============");
         sender.sendMessage(DecorationConst.GREEN + "中心プレイヤー: " + centralPlayerName);
+        sender.sendMessage(DecorationConst.GREEN + "現在の水位: y = " + (Config.waterLevel.currentLevel() - 1));
         sender.sendMessage(DecorationConst.GREEN + "影響範囲: 周囲" + Config.effectiveRange.halfRange() + "ブロック");
         sender.sendMessage(DecorationConst.GREEN + "水面上昇スパン: " + Config.waterRisingSpan.secondValue() + "秒");
         sender.sendMessage(DecorationConst.GREEN + "溶岩雨処理スパン: " + Config.lavaRainySpan.value() + "tick");
@@ -68,6 +73,10 @@ public class Config {
 
     public static WaterRisingSpan waterRisingSpan() {
         return waterRisingSpan;
+    }
+
+    public static WaterLevel waterLevel() {
+        return waterLevel;
     }
 
     /**********
@@ -106,7 +115,7 @@ public class Config {
     public static void setLavaRainySpan(CommandSender sender, String arg) {
         try {
             lavaRainySpan = new LavaRainySpan(Integer.parseInt(arg));
-            sender.sendMessage(DecorationConst.GREEN + "溶岩雨の処理スパン" + arg + "tickに設定しました");
+            sender.sendMessage(DecorationConst.GREEN + "溶岩雨の処理スパンを" + arg + "tickに設定しました");
         } catch (NumberFormatException e) {
             sender.sendMessage("引数が不正です");
         }
@@ -118,7 +127,18 @@ public class Config {
     public static void setWaterRisingSpan(CommandSender sender, String arg) {
         try {
             waterRisingSpan = new WaterRisingSpan(Integer.parseInt(arg));
-            sender.sendMessage(DecorationConst.GREEN + "水面上昇の処理スパン" + arg + "秒に設定しました");
+            sender.sendMessage(DecorationConst.GREEN + "水面上昇の処理スパンを" + waterRisingSpan.secondValue() + "秒に設定しました");
+        } catch (NumberFormatException e) {
+            sender.sendMessage("引数が不正です");
+        }
+    }
+
+    /**
+     * コマンドで水位を設定する
+     * */
+    public static void setWaterLevel(CommandSender sender, String arg) {
+        try {
+            sender.sendMessage(DecorationConst.GREEN + "水位を" + waterLevel.setWaterLevel(Integer.parseInt(arg)) + "に設定しました");
         } catch (NumberFormatException e) {
             sender.sendMessage("引数が不正です");
         }

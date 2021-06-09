@@ -191,6 +191,15 @@ public class CommandHandler implements CommandExecutor {
                     TaskManager.runRisingTask();
                 }
                 return;
+
+            case WATER_LEVEL:
+                Config.setWaterLevel(commandSender, arguments[3]);
+
+                // 再起動
+                if (RisingTask.isRunning()) {
+                    TaskManager.runRisingTask();
+                }
+                return;
         }
     }
 }

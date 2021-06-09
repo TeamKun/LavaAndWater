@@ -1,4 +1,4 @@
-package net.kunmc.lab.lavaandwater.world.waterLevelRise;
+package net.kunmc.lab.lavaandwater.config;
 
 public class WaterLevel {
     /** インスタンス */
@@ -16,7 +16,7 @@ public class WaterLevel {
     /**
      * インスタンスを取得する
      * */
-    public static WaterLevel instance() {
+    static WaterLevel instance() {
         return INSTANCE;
     }
 
@@ -28,13 +28,29 @@ public class WaterLevel {
     }
 
     /**
+     * 水位をセットする
+     * */
+    int setWaterLevel(int level) {
+        if (level <= 1) {
+            level = 1;
+        }
+
+        if (level > HEIGHT_LIMIT) {
+            level = HEIGHT_LIMIT;
+        }
+
+        currentLevel = level;
+
+        return currentLevel;
+    }
+
+    /**
      * 水面を上昇させる.
      * */
     public void rise() {
         if (currentLevel > HEIGHT_LIMIT) {
             return;
         }
-
         currentLevel ++;
     }
 
